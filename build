@@ -1,0 +1,1 @@
+g++ -g engine.cpp display.cpp -o game -lallegro -lallegro_main -lallegro_font -lallegro_ttf -lallegro_image -lallegro_primitives
