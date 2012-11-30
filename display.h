@@ -3,6 +3,7 @@
 
 #include "global.h"
 #include "render.h"
+//#include "game.h"
 #include <vector> 
 
 class Display {
@@ -12,12 +13,15 @@ class Display {
         ALLEGRO_COLOR bgcolor;
         ALLEGRO_EVENT_QUEUE *queue;
         int size_w, size_h;
+        bool closed;
         std::vector<Renderable *> renderables;
 
     public:
         Display (int w, int h);
         Display (int w, int h, ALLEGRO_COLOR c);
 
+        //void tick (Game g) {}
+        bool getClosed ();
         void del ();
         void setBackgroundColor(ALLEGRO_COLOR c);
         int getWidth();

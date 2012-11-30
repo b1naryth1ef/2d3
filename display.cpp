@@ -1,6 +1,7 @@
 #include "display.h"
 
 void Display::Init (int w, int h) {
+    closed = false;
     size_w = w;
     size_h = h;
     display = al_create_display(w, h);
@@ -34,11 +35,15 @@ void Display::render() {
     al_flip_display();
 }
 
+bool Display::getClosed(){
+    return closed;
+}
+
 void Display::renderEvents() {
     //printf("%d", (int)renderables.size());
     for (int i=0; i < renderables.size(); i++) {
         if (!renderables[i]->renders(display)) {
-            printf("A render failed for Renderable w/ id #%d", i);
+            printf("A render failed for Renderable w/ id #%d\n", i);
         }
     }
 }
