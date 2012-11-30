@@ -6,13 +6,18 @@ void Display::Init (int w, int h) {
     size_h = h;
     display = al_create_display(w, h);
     bgcolor = al_map_rgb(0, 0, 0);
-    queue = al_create_event_queue();
+    // queue = al_create_event_queue();
+    // al_register_event_source(queue, al_get_display_event_source(display));
 }
 
 Display::Display (int w, int h) { Init(w, h); }
 Display::Display (int w, int h, ALLEGRO_COLOR c) {
     Init(w, h);
     setBackgroundColor(c);
+}
+
+ALLEGRO_DISPLAY* Display::getDisplay() {
+    return display;
 }
 
 void Display::del () {
@@ -35,8 +40,15 @@ void Display::render() {
     al_flip_display();
 }
 
+// void Display::displayTick(){
+// }
+
 bool Display::getClosed(){
     return closed;
+}
+
+bool Display::getActive() {
+    return active;
 }
 
 void Display::renderEvents() {

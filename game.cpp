@@ -1,39 +1,42 @@
 #include "game.h"
 
-Game::Game (Display *d) {
-    display = d;
-    fps = DEFAULT_FPS;
-}
-
-// Core Functions
-void Game::gameQuit() {
-    display->del();
-}
-void Game::gameTick() {
-    if (display->getClosed()) {
-        setState(QUIT);
+int main(int argc, char **argv) { 
+    al_init();
+    al_init_image_addon();
+    
+    Display d (500, 500);
+    Engine g (&d);
+    ALLEGRO_BITMAP *bmp = al_load_bitmap("m.png");
+    if (!bmp) {
+        printf("Could not load bmp!\n");
+        return -1;
     }
-}
-void Game::gameRender() {
-    display->renderEvents();
-    display->render();
-}
-void Game::gameSleep() {
-    al_rest(1/fps);
-}
+    BaseSprite s (bmp);
 
-// Modifiers
-void Game::setFps(int i) {
-    fps = i;
-}
-int Game::getFps() {
-    return fps;
-}
+    g.display->addRenderable(&s);
+    g.setState(ERUNNING);
 
-void Game::setState(GameState s) {
-    state = s;
-}
+    while (1) {
+        while (g.getState() == ERUNNING) {
+            g.engineTick();
+            g.engineRender();
+            g.engineSleep();
+        }
 
-GameState Game::getState() {
-    return state;
+        printf("BREAK\n");
+        if (g.getState() == EPAUSED) {
+            while (g.getState() == EPAUSED) {
+                g.engineTick();
+                g.engineSleep(1);
+            }
+        }
+
+        if (g.getState() == EQUIT) {
+            g.engineQuit();
+            break;
+        }
+    }
+
+    d.del();
+    return 0;
 }
