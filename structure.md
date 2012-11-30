@@ -12,5 +12,9 @@
 - `input.cpp`: Input stuffs
 
 ## Display
-- `display.h`: Core header file for display actions
+- `display.h`: Display header file
 - `display.cpp`: Anything that has to do with rendering/display/etc
+
+## Render
+- `render.h`: Render header file
+- `render.cpp`: Handles the base renderable class and handy utils/functions for rendering things to screen

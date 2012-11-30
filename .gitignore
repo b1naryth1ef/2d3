@@ -1,2 +1,5 @@
 game
-*.dYSM
+*.dSYM
+*~
+*#
+.DS_Store

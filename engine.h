@@ -3,4 +3,5 @@
 
 #include "global.h"
 #include "display.h"
+#include "render.h"
 #endif

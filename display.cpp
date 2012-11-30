@@ -34,4 +34,26 @@ void Display::render() {
     al_flip_display();
 }
 
-void Display::renderEvents() {}
+void Display::renderEvents() {
+    //printf("%d", (int)renderables.size());
+    for (int i=0; i < renderables.size(); i++) {
+        if (!renderables[i]->renders(display)) {
+            printf("A render failed for Renderable w/ id #%d", i);
+        }
+    }
+}
+
+int Display::addRenderable(Renderable *r) {
+    renderables.push_back(r);
+    return renderables.size()-1; //Should be ID
+}
+
+bool Display::rmvRenderable(int id) {
+    if (id >= renderables.size()) return false;
+    renderables[id] = NULL;
+    return true;
+}
+
+bool Display::rmvRenderable(Renderable *r) {
+    return rmvRenderable(r->id);
+}
