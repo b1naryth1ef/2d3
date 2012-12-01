@@ -3,6 +3,8 @@
 
 #include "global.h"
 #include "display.h"
+#include "tickable.h"
+#include <vector>
 
 #define DEFAULT_FPS 60
 
@@ -11,6 +13,7 @@ enum EngineState {ELOADING, ERUNNING, EPAUSED, EQUIT};
 class Engine {
     private:
         EngineState state;
+        std::vector<Tickable *> tickables;
         ALLEGRO_EVENT_QUEUE *queue;
         ALLEGRO_TIMEOUT timeout;
         int fps;
@@ -27,7 +30,12 @@ class Engine {
         void engineTick();
         void engineRender();
         void engineSleep();
-        void engineSleep(int s);
+        void engineSleep(float s);
+
+        // Tickables
+        int addTickable(Tickable *t);
+        bool rmvTickable(int id);
+        bool rmvTickable(Tickable *t);
 
         // Modifiers
         void setFps(int i);

@@ -12,23 +12,17 @@ int main(int argc, char **argv) {
         return -1;
     }
     BaseSprite s (bmp);
+    //Tickable t;
 
+    g.addTickable(&s);
     g.display->addRenderable(&s);
     g.setState(ERUNNING);
 
     while (1) {
-        while (g.getState() == ERUNNING) {
+        while (g.getState() == ERUNNING || g.getState() == EPAUSED) {
             g.engineTick();
             g.engineRender();
             g.engineSleep();
-        }
-
-        printf("BREAK\n");
-        if (g.getState() == EPAUSED) {
-            while (g.getState() == EPAUSED) {
-                g.engineTick();
-                g.engineSleep(1);
-            }
         }
 
         if (g.getState() == EQUIT) {
@@ -37,6 +31,6 @@ int main(int argc, char **argv) {
         }
     }
 
-    d.del();
+    //d.del();
     return 0;
 }

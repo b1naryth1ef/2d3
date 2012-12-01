@@ -6,5 +6,6 @@
 #include "render.h"
 #include "engine.h"
 #include "sprite.h"
+#include "tickable.h"
 
 #endif

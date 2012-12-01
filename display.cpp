@@ -40,9 +40,6 @@ void Display::render() {
     al_flip_display();
 }
 
-// void Display::displayTick(){
-// }
-
 bool Display::getClosed(){
     return closed;
 }
@@ -52,7 +49,6 @@ bool Display::getActive() {
 }
 
 void Display::renderEvents() {
-    //printf("%d", (int)renderables.size());
     for (int i=0; i < renderables.size(); i++) {
         if (!renderables[i]->renders(display)) {
             printf("A render failed for Renderable w/ id #%d\n", i);

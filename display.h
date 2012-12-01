@@ -3,7 +3,6 @@
 
 #include "global.h"
 #include "render.h"
-//#include "engine.h"
 #include <vector> 
 
 class Display {
@@ -19,7 +18,6 @@ class Display {
         Display (int w, int h);
         Display (int w, int h, ALLEGRO_COLOR c);
 
-        //void tick (Game g) {}
         ALLEGRO_DISPLAY* getDisplay();
         bool getClosed ();
         bool getActive ();
@@ -29,7 +27,6 @@ class Display {
         int getHeight();
         void render();
         void renderEvents();
-        // void displayTick();
 
         int addRenderable(Renderable *r);
         bool rmvRenderable(int id);

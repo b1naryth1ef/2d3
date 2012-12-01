@@ -2,17 +2,17 @@
 
 BaseSprite::BaseSprite (ALLEGRO_BITMAP *bmp) {
     img = bmp;
-    x = 0.1;
-    y = 0.1;
+    pos->setX(0);
+    pos->setY(0);
 }
 
 bool BaseSprite::renders(ALLEGRO_DISPLAY *display) {
-    al_draw_bitmap(img, x, y, 0);
+    al_draw_bitmap(img, pos->x, pos->y, 0);
     return true;
 }
 
 bool BaseSprite::tick() {
-    x += .1;
-    y += .1;
+    pos->addX(.01);
+    pos->addY(.01);
     return true;
 }

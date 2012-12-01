@@ -3,13 +3,12 @@
 
 #include "global.h"
 #include "render.h"
-//#include "engine.h"
+#include "tickable.h"
+#include "util.h"
 
-//class Renderable;
-
-class BaseSprite: public Renderable {
+class BaseSprite: public Renderable, public Tickable {
     private:
-        float x, y;
+        Pos *pos;
         ALLEGRO_BITMAP *img;
     public:
         BaseSprite (ALLEGRO_BITMAP *bmp);
