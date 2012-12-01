@@ -20,17 +20,17 @@ void Engine::engineTick() {
         if (!al_wait_for_event_until(queue, &ev, &timeout)) { break; }
         switch (ev.type) {
             case ALLEGRO_EVENT_DISPLAY_CLOSE:
-                display->closed = true;
+                display->setClosed(true);
                 setState(EQUIT);
                 break;
             case ALLEGRO_EVENT_DISPLAY_SWITCH_OUT:
                 printf("Lost Focus\n");
-                display->active = false;
+                display->setActive(false);
                 setState(EPAUSED);
                 break;
             case ALLEGRO_EVENT_DISPLAY_SWITCH_IN:
                 printf("Gained Focus\n");
-                display->active = true;
+                display->setActive(true);
                 setState(ERUNNING);
                 break;
         }
@@ -58,37 +58,37 @@ void Engine::engineSleep() {
     engineSleep(1/fps);
 }
 
-void Engine::engineSleep(float s) {
-    al_rest(s);
-}
+void Engine::engineSleep(float s) { al_rest(s); }
 
 // Modifiers
-void Engine::setFps(int i) {
-    fps = i;
-}
-int Engine::getFps() {
-    return fps;
+void Engine::setFps(int i) { fps = i; }
+int Engine::getFps() { return fps; }
+void Engine::setState(EngineState s) { state = s; }
+EngineState Engine::getState() { return state; }
+
+int Engine::findTickable(Tickable *t) {
+    for (int i=0; i < tickables.size(); i++) {
+        if (tickables[i] == t) {
+            return i;
+        }
+    }
+    return -1;
 }
 
-void Engine::setState(EngineState s) {
-    state = s;
-}
-
-EngineState Engine::getState() {
-    return state;
-}
-
-int Engine::addTickable(Tickable *t) {
+void Engine::addTickable(Tickable *t) {
     tickables.push_back(t);
-    return tickables.size()-1; //Should be ID
 }
 
-bool Engine::rmvTickable(int id) {
-    if (id >= tickables.size()) return false;
-    tickables[id] = NULL;
-    return true;
+void Engine::rmvTickable(Tickable *t) {
+    tickables.erase(tickables.begin()+findTickable(t));
 }
 
-bool Engine::rmvTickable(Tickable *t) {
-    return rmvTickable(t->id);
+void Engine::addSprite(BaseSprite *s) {
+    addTickable(s);
+    display->addRenderable(s);
+}
+
+void Engine::rmvSprite(BaseSprite *s) {
+    rmvTickable(s);
+    display->rmvRenderable(s);
 }

@@ -4,6 +4,7 @@
 #include "global.h"
 #include "display.h"
 #include "tickable.h"
+#include "sprite.h"
 #include <vector>
 
 #define DEFAULT_FPS 60
@@ -32,10 +33,14 @@ class Engine {
         void engineSleep();
         void engineSleep(float s);
 
+        // Sprites
+        void addSprite(BaseSprite *s);
+        void rmvSprite(BaseSprite *s);
+
         // Tickables
-        int addTickable(Tickable *t);
-        bool rmvTickable(int id);
-        bool rmvTickable(Tickable *t);
+        int findTickable(Tickable *t);
+        void addTickable(Tickable *t);
+        void rmvTickable(Tickable *t);
 
         // Modifiers
         void setFps(int i);

@@ -12,30 +12,40 @@ class Display {
         void Init (int w, int h);
         ALLEGRO_DISPLAY *display;
         ALLEGRO_COLOR bgcolor;
-        int size_w, size_h;     
+        int size_w, size_h;   
+        bool closed, active;  
         char title [50];
         std::vector<Renderable *> renderables;
 
     public:
-        bool closed, active;
+        
         Display (int w, int h);
         Display (int w, int h, ALLEGRO_COLOR c);
 
         ALLEGRO_DISPLAY* getDisplay();
-        void setTitle(char t[50]);
+
+        // Getters
         char *getTitle();
         bool getClosed ();
         bool getActive ();
-        void del ();
-        void setBackgroundColor(ALLEGRO_COLOR c);
         int getWidth();
         int getHeight();
+
+        // Setters
+        void setClosed (bool v);
+        void setActive (bool v);
+        void setTitle(char t[50]);
+        void setBackgroundColor(ALLEGRO_COLOR c);
+
+        // Calls
+        void del ();
         void render();
         void renderEvents();
 
-        int addRenderable(Renderable *r);
-        bool rmvRenderable(int id);
-        bool rmvRenderable(Renderable *r);
+        // Renderables
+        int findRenderable(Renderable *r);
+        void addRenderable(Renderable *r);
+        void rmvRenderable(Renderable *r);
 };
 
 #endif

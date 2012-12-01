@@ -1,6 +1,7 @@
 #ifndef UTIL_H
 #define UTIL_H
 
+
 struct Pos { //Handy struct for postional data
     float x, y;
 
@@ -26,8 +27,5 @@ struct Pos { //Handy struct for postional data
 struct Vector {
     float x, y, z;
 };
-
-static int uidinc = 0;
-int getUID () { return ++uidinc; }
 
 #endif

@@ -1,6 +1,5 @@
 #include "tickable.h"
 
-
 Tickable::Tickable (void) {
     active = false;
 }
