@@ -21,7 +21,7 @@ ALLEGRO_DISPLAY* Display::getDisplay() {
 
 void Display::setTitle (char t[50]) {
     strncpy(title, t, 50-1);
-	title[50-1] = '\0';
+    title[50-1] = '\0';
     al_set_window_title(display, title);
 }
 
