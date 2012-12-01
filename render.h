@@ -11,16 +11,38 @@ class Renderable {
         bool active;
         char name;
     public:
-        int id;
-        void setID(int i);
+        Pos *pos;
+        // Constructor
+        Renderable ();
+
         bool isActive ();
         void setActive (bool i);
+        void setPos (Pos *p);
         // Overwriteables
         virtual bool renders (ALLEGRO_DISPLAY *display);
 };
 
-class TestRenderable: public Renderable {
+class Text : public Renderable {
+    private:
+        const char *text;
+        ALLEGRO_FONT *font;
+        ALLEGRO_COLOR color;
     public:
+        // Constructor
+        Text (const char *t, ALLEGRO_FONT *f);
+        Text (const char *t, ALLEGRO_FONT *f, ALLEGRO_COLOR *c);
+
+        // Overwrites
         bool renders (ALLEGRO_DISPLAY *display);
+
+        // Setters
+        void setText(char *t);
+        void setColor(ALLEGRO_COLOR *c);
+        void setFont(ALLEGRO_FONT *f);
+
+        // Getters
+        ALLEGRO_COLOR *getColor();
+        ALLEGRO_FONT *getFont();
+        const char *getText();
 };
 #endif

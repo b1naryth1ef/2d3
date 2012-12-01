@@ -9,7 +9,6 @@
 
 class BaseSprite: public Renderable, public Tickable {
     public:
-        Pos *pos;
         ALLEGRO_BITMAP *img;
         BaseSprite (ALLEGRO_BITMAP *bmp);
         virtual bool renders (ALLEGRO_DISPLAY *display);

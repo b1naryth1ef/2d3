@@ -1,6 +1,33 @@
 #include "display.h"
 
 
+bool loadFont (int f, const char * name, int size) {
+    if (FONTS.find(f) == FONTS.end()) { //Key doesnt exist
+        FONTS[f] = al_load_font(name, size, 0);
+        return true;
+    } else {
+        fprintf(stderr, "That font name (%d) already exists!\n", f);
+        return false;
+    }
+}
+
+bool unloadFont (int f) {
+    if (FONTS.find(f) != FONTS.end()) {
+        FONTS.erase(FONTS.find(f));
+        return true;
+    } else {
+        fprintf(stderr, "That font name (%d) does not exist!\n", f);
+        return false;
+    }
+}
+
+ALLEGRO_FONT *getFont (int f) {
+    if (FONTS.find(f) != FONTS.end()) {
+        return FONTS[f];
+    }
+    return NULL;
+}
+
 void Display::Init (int w, int h) {
     closed = false;
     size_w = w;

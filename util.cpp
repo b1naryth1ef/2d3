@@ -4,9 +4,25 @@ Pos::Pos () {
     x = 1;
     y = 1;
 }
+
 Pos::Pos (float ix, float iy) {
     x = ix;
     y = iy;
+}
+
+Pos::Pos (float ix, float iy, float mx, float my) {
+    x = ix;
+    y = iy;
+    maxx = mx;
+    maxy = my;
+}
+
+bool Pos::checkPos (float vx, float vy) {
+    if (!maxx || !maxy) { return true; }
+    if ((0 <= vx <= maxx) && (0 <= vy <= maxy)) {
+        return true;
+    }
+    return false;
 }
 
 void Pos::operator+= (float inc) {
@@ -14,40 +30,82 @@ void Pos::operator+= (float inc) {
     addY(inc);
 }
 
-Pos Pos::operator+ (Pos other) {
-    Pos n (x+other.x, y+other.y);
-    return n;
+void Pos::operator*= (float inc) {
+    multiX(inc);
+    multiY(inc);
 }
 
-Pos Pos::operator+ (float inc) {
-    Pos n (x+inc, y+inc);
-    return n;
+void Pos::operator-= (float inc) {
+    addX(-1*inc);
+    addY(-1*inc);
 }
 
-Pos Pos::operator- (Pos other) {
-    Pos n (x-other.x, y-other.y);
-    return n;
+void Pos::operator/= (float inc) {
+    divX(inc);
+    divY(inc);
 }
 
-Pos Pos::operator- (float inc) {
-    Pos n (x-inc, y-inc);
-    return n;
+bool Pos::operator== (Pos p2) {
+    return (p2.x == x && p2.y == y);
 }
 
-Pos Pos::operator* (Pos other) {
-    Pos n (x*other.x, y*other.y);
-    return n;
+bool Pos::operator> (Pos p2) {
+    return (x > p2.x && y > p2.y);
 }
 
-Pos Pos::operator* (float inc) {
-    Pos n (x*inc, y*inc);
-    return n;
+bool Pos::operator<= (Pos p2) {
+    return (x <= p2.x && y <= p2.y);
 }
 
-void Pos::setX(float v) { x = v; }
-void Pos::setY(float v) { y = v; }
+bool Pos::operator< (Pos p2) {
+    return (x < p2.x && y < p2.y);
+}
 
-void Pos::addX(float v) { x += v; }
-void Pos::addY(float v) { y += v; }
+bool Pos::operator>= (Pos p2) {
+    return (x >= p2.x && y >= p2.y);
+}
 
 
+bool Pos::addX(float v) { 
+    if (!checkPos(x+v, y)) { return false; }
+    x += v;
+    return true;
+}
+
+bool Pos::addY(float v) { 
+    if (!checkPos(x, y+v)) { return false; }
+    y += v;
+    return true;
+}
+
+bool Pos::multiX(float v) {
+    if (!checkPos(x*v, y)) { return false; }
+    x *= v;
+    return true;
+}
+
+bool Pos::multiY(float v) {
+    if (!checkPos(x, y*v)) { return false; }
+    y *= v;
+    return true;
+}
+
+bool Pos::divX(float v) {
+    if (!checkPos(x/v, y)) { return false; }
+    x /= v;
+    return true;
+}
+
+bool Pos::divY(float v) {
+    if (!checkPos(x, y/v)) { return false; }
+    x /= v;
+    return true;
+}
+
+Pos *Pos::copy() {
+    if (!maxx || !maxy) {
+        return new Pos(x, y);
+    } else {
+        return new Pos(x, y, maxx, maxy);
+    }
+}

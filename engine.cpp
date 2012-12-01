@@ -16,8 +16,7 @@ void Engine::init () {
     al_init_font_addon();
     al_init_ttf_addon();
 
-    display = new Display (500, 500);
-    font = al_load_ttf_font("visitor2.ttf", 30, 0);
+    display = new Display (size_x, size_y);
     al_init_timeout(&timeout, 0.8);
     queue = al_create_event_queue();
     al_register_event_source(queue, al_get_display_event_source(display->getDisplay()));
@@ -61,7 +60,7 @@ void Engine::engineTick() {
 void Engine::engineRender() {
     if (state == EPAUSED) {return;}
     display->renderEvents();
-    al_draw_text(font, al_map_rgb(0, 0, 0), 0, 15, 0, "Test");
+    //al_draw_text(font, al_map_rgb(0, 0, 0), 0, 15, 0, "Test");
     display->render();
 }
 

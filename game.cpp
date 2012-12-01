@@ -17,6 +17,12 @@ int main(int argc, char **argv) {
     ALLEGRO_BITMAP *fexample = s.addFrame(0, 0, 16, 16); // Lets say we store these frames
     s.rmvFrame(fexample); // We can remove them!
 
+    loadFont(1, "visitor2.ttf", 45);
+    Text *t = new Text("Testing", getFont(1));
+    t->pos->x = 0;
+    t->pos->y = 0;
+    g.display->addRenderable(t);
+
     g.addSprite(&s); // Now lets add the sprite to the game!
 
     char title[50] = "Test!";
