@@ -16,7 +16,7 @@ bool BaseSprite::tick() {
     return true;
 }
 
-AnimatedSprite::AnimatedSprite (ALLEGRO_BITMAP *bmp, int f) : BaseSprite (bmp) { 
+AnimatedSprite::AnimatedSprite (ALLEGRO_BITMAP *bmp, float f) : BaseSprite (bmp) { 
     cur_frame = 0;
     num_frames = 0;
     fps = f;
@@ -38,7 +38,7 @@ bool AnimatedSprite::renders(ALLEGRO_DISPLAY *display) {
 }
 
 bool AnimatedSprite::tick() {
-    if ((al_get_time()-last) > 1/fps) {
+    if ((al_get_time()-last) > fps) {
         nextFrame();
         last = al_get_time();
     }

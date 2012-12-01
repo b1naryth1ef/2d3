@@ -18,10 +18,11 @@ class BaseSprite: public Renderable, public Tickable {
 class AnimatedSprite: public BaseSprite {
     private:
         std::vector<ALLEGRO_BITMAP *> frames;
-        int num_frames, cur_frame, fps;
+        int num_frames, cur_frame;
+        float fps;
         double last;
     public:
-        AnimatedSprite (ALLEGRO_BITMAP *bmp, int f);
+        AnimatedSprite (ALLEGRO_BITMAP *bmp, float f);
 
         int getFps ();
         void setFps (int f);

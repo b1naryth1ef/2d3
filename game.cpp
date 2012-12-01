@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
     }
 
     // Lets create a new sprite from a sprite sheet
-    AnimatedSprite s (bmp, 1);
+    AnimatedSprite s (bmp, .3);
     s.addFrame(0, 0, 16, 16); // This adds a frame (x, y offset and h/w)
     s.addFrame(16, 0, 16, 16); // And another
     ALLEGRO_BITMAP *fexample = s.addFrame(0, 0, 16, 16); // Lets say we store these frames
@@ -19,8 +19,8 @@ int main(int argc, char **argv) {
 
     loadFont(1, "visitor2.ttf", 45);
     Text *t = new Text("Testing", getFont(1));
-    t->pos->x = 0;
-    t->pos->y = 0;
+    t->pos->x = size_x/2;
+    t->pos->y = size_y/2;
     g.display->addRenderable(t);
 
     g.addSprite(&s); // Now lets add the sprite to the game!

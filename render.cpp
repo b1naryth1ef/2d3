@@ -15,12 +15,14 @@ void Renderable::setActive (bool i) { active = i; }
 
 // Constructor
 Text::Text (const char *t, ALLEGRO_FONT *f) : Renderable () {
+    align = CENTER;
     text = t;
     font = f;
     color = al_map_rgb(0, 0, 0);
 }
 
 Text::Text (const char *t, ALLEGRO_FONT *f, ALLEGRO_COLOR *c) : Renderable () {
+    align = CENTER;
     text = t;
     font = f;
     color = *c;
@@ -37,6 +39,21 @@ ALLEGRO_FONT *Text::getFont() { return font; }
 const char *Text::getText() { return text; }
 
 bool Text::renders (ALLEGRO_DISPLAY *display) {
-    al_draw_text(font, color, pos->x, pos->y, 0, text);
+    int flags;
+    if (align == CENTER) {
+        flags = ALLEGRO_ALIGN_CENTRE;
+    } else if (align == RIGHT) {
+        flags = ALLEGRO_ALIGN_RIGHT;
+    } else {
+        flags = ALLEGRO_ALIGN_LEFT;
+    }
+    al_draw_text(font, color, pos->x, pos->y, flags, text);
     return true;
+}
+
+void Text::setTextType (TextType t) {
+    align = t;
+}
+TextType Text::getTextType() {
+    return align;
 }

@@ -6,6 +6,8 @@
 int addGlobalImage ();
 void rmvGlobalImage ();
 
+enum TextType {LEFT, CENTER, RIGHT};
+
 class Renderable {
     private:
         bool active;
@@ -27,6 +29,7 @@ class Text : public Renderable {
         const char *text;
         ALLEGRO_FONT *font;
         ALLEGRO_COLOR color;
+        TextType align;
     public:
         // Constructor
         Text (const char *t, ALLEGRO_FONT *f);
@@ -36,6 +39,7 @@ class Text : public Renderable {
         bool renders (ALLEGRO_DISPLAY *display);
 
         // Setters
+        void setTextType(TextType t);
         void setText(char *t);
         void setColor(ALLEGRO_COLOR *c);
         void setFont(ALLEGRO_FONT *f);
@@ -44,5 +48,6 @@ class Text : public Renderable {
         ALLEGRO_COLOR *getColor();
         ALLEGRO_FONT *getFont();
         const char *getText();
+        TextType getTextType();
 };
 #endif
