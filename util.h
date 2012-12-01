@@ -27,4 +27,7 @@ struct Vector {
     float x, y, z;
 };
 
+static int uidinc = 0;
+int getUID () { return ++uidinc; }
+
 #endif

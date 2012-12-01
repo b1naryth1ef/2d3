@@ -2,6 +2,12 @@
 #define RENDER_H
 
 #include "global.h"
+#include <map>
+
+const std::map<int, ALLEGRO_BITMAP *> gframes;
+
+int addGlobalImage ();
+void rmvGlobalImage ();
 
 class Renderable {
     private:

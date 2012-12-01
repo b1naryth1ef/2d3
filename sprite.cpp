@@ -15,3 +15,23 @@ bool BaseSprite::tick() {
     pos->addY(.01);
     return true;
 }
+
+
+int AnimatedSprite::addFrame (int x, int y, int w, int h) {
+    int id = getUID();
+    frames[id] = al_create_sub_bitmap(img, x, y, w, h);
+    return id;
+}
+void AnimatedSprite::rmvFrame (int index) {}
+
+void AnimatedSprite::nextFrame() {
+    if ((cur_frame+1) > num_frames) {
+        cur_frame = 0;
+    }
+}
+ALLEGRO_BITMAP *AnimatedSprite::getFrameAt(int index) {
+    return frames[index];
+}
+ALLEGRO_BITMAP *AnimatedSprite::getCurrentFrame() {
+    return frames[cur_frame];
+}
