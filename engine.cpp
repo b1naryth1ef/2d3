@@ -1,15 +1,28 @@
 #include "engine.h"
 
 // Constructor
-Engine::Engine (Display *d) {
-    display = d;
+Engine::Engine () {
     fps = DEFAULT_FPS;
+}
+
+// Core Functions
+void Engine::setDisplay (Display *d) {
+    display = d;
+}
+
+void Engine::init () {
+    al_init();
+    al_init_image_addon();
+    al_init_font_addon();
+    al_init_ttf_addon();
+
+    display = new Display (500, 500);
+    font = al_load_ttf_font("visitor2.ttf", 30, 0);
     al_init_timeout(&timeout, 0.8);
     queue = al_create_event_queue();
     al_register_event_source(queue, al_get_display_event_source(display->getDisplay()));
 }
 
-// Core Functions
 void Engine::engineQuit() {
     display->del();
 }
@@ -48,6 +61,7 @@ void Engine::engineTick() {
 void Engine::engineRender() {
     if (state == EPAUSED) {return;}
     display->renderEvents();
+    al_draw_text(font, al_map_rgb(0, 0, 0), 0, 15, 0, "Test");
     display->render();
 }
 

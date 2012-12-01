@@ -17,6 +17,7 @@ class Engine {
         std::vector<Tickable *> tickables;
         ALLEGRO_EVENT_QUEUE *queue;
         ALLEGRO_TIMEOUT timeout;
+        ALLEGRO_FONT *font;
         int fps;
 
     public:
@@ -24,9 +25,11 @@ class Engine {
         Display *display;
 
         // Constructor
-        Engine (Display *d);
+        Engine ();
+        //Engine (Display *d);
 
         // Core Functions
+        void init();
         void engineQuit();
         void engineTick();
         void engineRender();
@@ -43,6 +46,7 @@ class Engine {
         void rmvTickable(Tickable *t);
 
         // Modifiers
+        void setDisplay(Display *d);
         void setFps(int i);
         int getFps();
 

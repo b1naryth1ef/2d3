@@ -1,11 +1,9 @@
 #include "game.h"
 
 int main(int argc, char **argv) { 
-    al_init();
-    al_init_image_addon();
-    
-    Display d (500, 500);
-    Engine g (&d);
+    Engine g;
+    g.init();
+
     ALLEGRO_BITMAP *bmp = al_load_bitmap("test.png");
     if (!bmp) {
         printf("Could not load bmp!\n");
