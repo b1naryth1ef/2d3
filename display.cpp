@@ -1,13 +1,12 @@
 #include "display.h"
 
+
 void Display::Init (int w, int h) {
     closed = false;
     size_w = w;
     size_h = h;
     display = al_create_display(w, h);
     bgcolor = al_map_rgb(0, 0, 0);
-    // queue = al_create_event_queue();
-    // al_register_event_source(queue, al_get_display_event_source(display));
 }
 
 Display::Display (int w, int h) { Init(w, h); }
@@ -18,6 +17,15 @@ Display::Display (int w, int h, ALLEGRO_COLOR c) {
 
 ALLEGRO_DISPLAY* Display::getDisplay() {
     return display;
+}
+
+void Display::setTitle (char t[50]) {
+    strncpy(t, title, 50);
+    al_set_window_title(display, t);
+}
+
+char *Display::getTitle () {
+    return title;
 }
 
 void Display::del () {

@@ -2,8 +2,7 @@
 
 BaseSprite::BaseSprite (ALLEGRO_BITMAP *bmp) {
     img = bmp;
-    pos->setX(0);
-    pos->setY(0);
+    pos = new Pos (0, 0);
 }
 
 bool BaseSprite::renders(ALLEGRO_DISPLAY *display) {

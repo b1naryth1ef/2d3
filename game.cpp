@@ -12,10 +12,11 @@ int main(int argc, char **argv) {
         return -1;
     }
     BaseSprite s (bmp);
-    //Tickable t;
 
     g.addTickable(&s);
     g.display->addRenderable(&s);
+    char title[50] = "Test!";
+    g.display->setTitle(title);
     g.setState(ERUNNING);
 
     while (1) {

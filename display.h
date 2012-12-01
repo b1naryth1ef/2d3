@@ -5,12 +5,15 @@
 #include "render.h"
 #include <vector> 
 
+#define DEFAULT_TITLE "2D3 -- Test Engine"
+
 class Display {
     private:
         void Init (int w, int h);
         ALLEGRO_DISPLAY *display;
         ALLEGRO_COLOR bgcolor;
         int size_w, size_h;     
+        char title [50];
         std::vector<Renderable *> renderables;
 
     public:
@@ -19,6 +22,8 @@ class Display {
         Display (int w, int h, ALLEGRO_COLOR c);
 
         ALLEGRO_DISPLAY* getDisplay();
+        void setTitle(char t[50]);
+        char *getTitle();
         bool getClosed ();
         bool getActive ();
         void del ();

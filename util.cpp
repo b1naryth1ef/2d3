@@ -1,7 +1,7 @@
 #include "util.h"
 
 Pos::Pos () {
-    x = 0;
+    x = 1;
     y = 1;
 }
 Pos::Pos (float ix, float iy) {
@@ -44,8 +44,8 @@ Pos Pos::operator* (float inc) {
     return n;
 }
 
-void Pos::setX(float v) { x = v; }
-void Pos::setY(float v) { y = v; }
+void Pos::setX(float v) { this->x = v; }
+void Pos::setY(float v) { this->y = v; }
 
-void Pos::addX(float v) { x += v; }
-void Pos::addY(float v) { y += v; }
+void Pos::addX(float v) { this->x += v; }
+void Pos::addY(float v) { this->y += v; }
