@@ -8,12 +8,6 @@
 
 #define DEFAULT_TITLE "2D3 -- Test Engine"
 
-static std::map<int, ALLEGRO_FONT*> FONTS;
-
-bool loadFont (int f, const char * name, int size);
-bool unloadFont (int f);
-ALLEGRO_FONT *getFont (int f);
-
 class Display {
     private:
         void Init (int w, int h);

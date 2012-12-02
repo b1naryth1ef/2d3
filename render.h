@@ -7,6 +7,11 @@ int addGlobalImage ();
 void rmvGlobalImage ();
 
 enum TextType {LEFT, CENTER, RIGHT};
+static std::map<int, ALLEGRO_FONT*> FONTS;
+
+bool loadFont (int f, const char * name, int size);
+bool unloadFont (int f);
+ALLEGRO_FONT *getFont (int f);
 
 class Renderable {
     private:
@@ -30,18 +35,20 @@ class Text : public Renderable {
         ALLEGRO_FONT *font;
         ALLEGRO_COLOR color;
         TextType align;
+        void init (const char *t, ALLEGRO_FONT *f);
     public:
         // Constructor
+        Text (const char *t, int f);
         Text (const char *t, ALLEGRO_FONT *f);
-        Text (const char *t, ALLEGRO_FONT *f, ALLEGRO_COLOR *c);
+        Text (const char *t, ALLEGRO_FONT *f, ALLEGRO_COLOR c);
 
         // Overwrites
         bool renders (ALLEGRO_DISPLAY *display);
 
         // Setters
         void setTextType(TextType t);
-        void setText(char *t);
-        void setColor(ALLEGRO_COLOR *c);
+        void setText(const char *t);
+        void setColor(ALLEGRO_COLOR c);
         void setFont(ALLEGRO_FONT *f);
 
         // Getters

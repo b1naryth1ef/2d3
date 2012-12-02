@@ -1,5 +1,32 @@
 #include "render.h"
 
+bool loadFont (int f, const char * name, int size) {
+    if (FONTS.find(f) == FONTS.end()) { //Key doesnt exist
+        FONTS[f] = al_load_font(name, size, 0);
+        return true;
+    } else {
+        fprintf(stderr, "That font name (%d) already exists!\n", f);
+        return false;
+    }
+}
+
+bool unloadFont (int f) {
+    if (FONTS.find(f) != FONTS.end()) {
+        FONTS.erase(FONTS.find(f));
+        return true;
+    } else {
+        fprintf(stderr, "That font name (%d) does not exist!\n", f);
+        return false;
+    }
+}
+
+ALLEGRO_FONT *getFont (int f) {
+    if (FONTS.find(f) != FONTS.end()) {
+        return FONTS[f];
+    }
+    return NULL;
+}
+
 Renderable::Renderable () {
     pos = new Pos(0, 0, size_x, size_y);
 }
@@ -14,23 +41,31 @@ void Renderable::setActive (bool i) { active = i; }
 
 
 // Constructor
-Text::Text (const char *t, ALLEGRO_FONT *f) : Renderable () {
-    align = CENTER;
-    text = t;
-    font = f;
+void Text::init (const char *t, ALLEGRO_FONT *f) {
+    setTextType(CENTER);
+    setText(t);
+    setFont(f);
     color = al_map_rgb(0, 0, 0);
 }
 
-Text::Text (const char *t, ALLEGRO_FONT *f, ALLEGRO_COLOR *c) : Renderable () {
+Text::Text (const char *t, int f) {
+    init(t, ::getFont(f));
+}
+
+Text::Text (const char *t, ALLEGRO_FONT *f) : Renderable () {
+    init(t, f);
+}
+
+Text::Text (const char *t, ALLEGRO_FONT *f, ALLEGRO_COLOR c) : Renderable () {
     align = CENTER;
     text = t;
     font = f;
-    color = *c;
+    color = c;
 }
 
 // Setters
-void Text::setText(char *t) { text = t; }
-void Text::setColor(ALLEGRO_COLOR *c) { color = *c; }
+void Text::setText(const char *t) { text = t; }
+void Text::setColor(ALLEGRO_COLOR c) { color = c; }
 void Text::setFont(ALLEGRO_FONT *f) { font = f; }
 
 // Getters

@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
     s.rmvFrame(fexample); // We can remove them!
 
     loadFont(1, "visitor2.ttf", 45);
-    Text *t = new Text("Testing", getFont(1));
+    Text *t = new Text("Testing", 1);
     t->pos->x = size_x/2;
     t->pos->y = size_y/2;
     g.display->addRenderable(t);
