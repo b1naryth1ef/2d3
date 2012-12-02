@@ -18,6 +18,7 @@ class Engine {
         ALLEGRO_EVENT_QUEUE *queue;
         ALLEGRO_TIMEOUT timeout;
         ALLEGRO_FONT *font;
+        ALLEGRO_TIMER *timer;
         int fps;
 
     public:
@@ -31,7 +32,7 @@ class Engine {
         // Core Functions
         void init();
         void engineQuit();
-        void engineTick();
+        void engineStart();
         void engineRender();
         void engineSleep();
         void engineSleep(float s);

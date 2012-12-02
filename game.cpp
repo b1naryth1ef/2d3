@@ -28,20 +28,7 @@ int main(int argc, char **argv) {
     char title[50] = "Test!";
     g.display->setTitle(title);
     g.setState(ERUNNING);
+    g.engineStart();
 
-    while (1) {
-        while (g.getState() == ERUNNING || g.getState() == EPAUSED) {
-            g.engineTick();
-            g.engineRender();
-            g.engineSleep();
-        }
-
-        if (g.getState() == EQUIT) {
-            g.engineQuit();
-            break;
-        }
-    }
-
-    //d.del();
     return 0;
 }

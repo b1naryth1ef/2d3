@@ -16,21 +16,29 @@ void Engine::init () {
     al_init_font_addon();
     al_init_ttf_addon();
 
+    timer = al_create_timer(1.0 / DEFAULT_FPS);
     display = new Display (size_x, size_y);
     al_init_timeout(&timeout, 0.8);
     queue = al_create_event_queue();
     al_register_event_source(queue, al_get_display_event_source(display->getDisplay()));
+    al_register_event_source(queue, al_get_timer_event_source(timer));
 }
 
 void Engine::engineQuit() {
     display->del();
+    al_destroy_timer(timer);
 }
 
-void Engine::engineTick() {
+void Engine::engineStart() {
+    al_start_timer(timer);
     ALLEGRO_EVENT ev;
+    bool refresh;
     while (1) {   
-        if (!al_wait_for_event_until(queue, &ev, &timeout)) { break; }
+        al_wait_for_event(queue, &ev);
         switch (ev.type) {
+            case ALLEGRO_EVENT_TIMER:
+                refresh = true;
+                break;
             case ALLEGRO_EVENT_DISPLAY_CLOSE:
                 display->setClosed(true);
                 setState(EQUIT);
@@ -46,13 +54,24 @@ void Engine::engineTick() {
                 setState(ERUNNING);
                 break;
         }
-    }
 
-    if (state == EPAUSED) { return; } //And now we quit if theres nothing todo
+        if (getState() == EPAUSED) {
+            //engineSleep(); //Less stress on cpu while we're in bg
+            continue;
+        } else if (getState() == EQUIT) {
+            engineQuit();
+            return;
+        }
 
-    for (int i=0; i < tickables.size(); i++) {
-        if (!tickables[i]->tick()) {
-            printf("Tick failed for tickable w/ ID #%d", i);
+        for (int i=0; i < tickables.size(); i++) {
+            if (!tickables[i]->tick()) {
+                printf("Tick failed for tickable w/ ID #%d", i);
+            }
+        }
+
+        if (refresh && al_is_event_queue_empty(queue)) {
+            refresh = false;
+            engineRender();
         }
     }
 }
