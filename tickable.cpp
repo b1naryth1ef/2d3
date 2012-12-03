@@ -1,7 +1,7 @@
 #include "tickable.h"
 
 Tickable::Tickable (void) {
-    active = false;
+    active = true;
 }
 
 bool Tickable::ticks () {
