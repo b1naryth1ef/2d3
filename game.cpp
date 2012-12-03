@@ -19,6 +19,7 @@ int main(int argc, char **argv) {
 
     loadFont(1, "visitor2.ttf", 45);
     Text *t = new Text("Testing", 1);
+    //t->setActive(false);
     t->pos->x = size_x/2;
     t->pos->y = size_y/2;
     g.display->addRenderable(t);

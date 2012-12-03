@@ -11,7 +11,7 @@ class BaseSprite: public Renderable, public Tickable {
     public:
         ALLEGRO_BITMAP *img;
         BaseSprite (ALLEGRO_BITMAP *bmp);
-        virtual bool renders (ALLEGRO_DISPLAY *display);
+        virtual bool render (ALLEGRO_DISPLAY *display);
         virtual bool tick ();
 };
 
@@ -31,7 +31,7 @@ class AnimatedSprite: public BaseSprite {
         ALLEGRO_BITMAP *addFrame (int x, int y, int w, int h);
         void rmvFrame(ALLEGRO_BITMAP *f);
 
-        bool renders (ALLEGRO_DISPLAY *display);
+        bool render (ALLEGRO_DISPLAY *display);
         bool tick ();
 
         void nextFrame();

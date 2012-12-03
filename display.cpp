@@ -38,9 +38,7 @@ void Display::setClosed(bool v) { closed = v; }
 void Display::renderEvents() {
     al_clear_to_color(bgcolor);
     for (int i=0; i < renderables.size(); i++) {
-        if (!renderables[i]->renders(display)) {
-            printf("A render failed for Renderable w/ id #%d\n", i);
-        }
+        renderables[i]->renders(display);
     }
 }
 

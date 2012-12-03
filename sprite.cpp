@@ -5,7 +5,7 @@ BaseSprite::BaseSprite (ALLEGRO_BITMAP *bmp) {
     pos = new Pos (0, 0);
 }
 
-bool BaseSprite::renders(ALLEGRO_DISPLAY *display) {
+bool BaseSprite::render(ALLEGRO_DISPLAY *display) {
     al_draw_bitmap(img, pos->x, pos->y, 0);
     return true;
 }
@@ -32,7 +32,7 @@ int AnimatedSprite::findFrame (ALLEGRO_BITMAP *f) {
     return -1;
 }
 
-bool AnimatedSprite::renders(ALLEGRO_DISPLAY *display) {
+bool AnimatedSprite::render(ALLEGRO_DISPLAY *display) {
     al_draw_bitmap(getCurrentFrame(), pos->x, pos->y, 0);
     return true;
 }

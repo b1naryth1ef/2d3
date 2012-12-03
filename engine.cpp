@@ -64,9 +64,7 @@ void Engine::engineStart() {
         }
 
         for (int i=0; i < tickables.size(); i++) {
-            if (!tickables[i]->tick()) {
-                printf("Tick failed for tickable w/ ID #%d", i);
-            }
+            tickables[i]->ticks();
         }
 
         if (refresh && al_is_event_queue_empty(queue)) {

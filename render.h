@@ -25,8 +25,9 @@ class Renderable {
         bool isActive ();
         void setActive (bool i);
         void setPos (Pos *p);
+        bool renders (ALLEGRO_DISPLAY *display);
         // Overwriteables
-        virtual bool renders (ALLEGRO_DISPLAY *display);
+        virtual bool render (ALLEGRO_DISPLAY *display);
 };
 
 class Text : public Renderable {
@@ -43,7 +44,7 @@ class Text : public Renderable {
         Text (const char *t, ALLEGRO_FONT *f, ALLEGRO_COLOR c);
 
         // Overwrites
-        bool renders (ALLEGRO_DISPLAY *display);
+        bool render (ALLEGRO_DISPLAY *display);
 
         // Setters
         void setTextType(TextType t);

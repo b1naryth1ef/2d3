@@ -28,10 +28,19 @@ ALLEGRO_FONT *getFont (int f) {
 }
 
 Renderable::Renderable () {
+    active = true;
     pos = new Pos(0, 0, size_x, size_y);
 }
 
 bool Renderable::renders (ALLEGRO_DISPLAY *display) {
+    if (active) {
+        return render(display);
+    } else {
+        return false;
+    }
+}
+
+bool Renderable::render (ALLEGRO_DISPLAY *display) {
     return true;
 }
 
@@ -73,7 +82,7 @@ ALLEGRO_COLOR *Text::getColor() { return &color; }
 ALLEGRO_FONT *Text::getFont() { return font; }
 const char *Text::getText() { return text; }
 
-bool Text::renders (ALLEGRO_DISPLAY *display) {
+bool Text::render (ALLEGRO_DISPLAY *display) {
     int flags;
     if (align == CENTER) {
         flags = ALLEGRO_ALIGN_CENTRE;
