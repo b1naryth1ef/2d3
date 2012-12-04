@@ -32,7 +32,7 @@ class AnimatedSprite: public BaseSprite {
         void rmvFrame(ALLEGRO_BITMAP *f);
 
         bool render (ALLEGRO_DISPLAY *display);
-        bool tick ();
+        virtual bool tick ();
 
         void nextFrame();
         ALLEGRO_BITMAP *getFrameAt(int id);

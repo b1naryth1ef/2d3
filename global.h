@@ -5,6 +5,7 @@
 #define size_y 500
 
 #include <stdio.h>
+#include <chipmunk/chipmunk.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_font.h>
