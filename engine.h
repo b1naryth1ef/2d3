@@ -6,20 +6,28 @@
 #include "tickable.h"
 #include "sprite.h"
 #include <vector>
+#include <map>
 
 #define DEFAULT_FPS 60
 
 enum EngineState {ELOADING, ERUNNING, EPAUSED, EQUIT};
+//extern EngineState estate;
+
+void setEngineState(EngineState s); 
+EngineState getEngineState(); 
+typedef void (*fpointer)(int, bool);
 
 class Engine {
     private:
-        EngineState state;
         std::vector<Tickable *> tickables;
-        ALLEGRO_EVENT_QUEUE *queue;
-        ALLEGRO_TIMEOUT timeout;
+        std::vector<fpointer> inputables;
+        ALLEGRO_EVENT_QUEUE *tqueue; //Tick queue
+        ALLEGRO_EVENT_QUEUE *iqueue; //Input queue
         ALLEGRO_FONT *font;
         ALLEGRO_TIMER *timer;
         int fps;
+
+        void tickInput();
 
     public:
         // Public Vars
@@ -27,7 +35,6 @@ class Engine {
 
         // Constructor
         Engine ();
-        //Engine (Display *d);
 
         // Core Functions
         void init();
@@ -36,6 +43,9 @@ class Engine {
         void engineRender();
         void engineSleep();
         void engineSleep(float s);
+
+        // Input
+        void addFunc(void (*pointer)(int, bool));
 
         // Sprites
         void addSprite(BaseSprite *s);
@@ -51,8 +61,7 @@ class Engine {
         void setFps(int i);
         int getFps();
 
-        void setState(EngineState s);
-        EngineState getState();
+        
         
 };
 

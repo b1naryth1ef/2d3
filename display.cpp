@@ -4,8 +4,10 @@ void Display::Init (int w, int h) {
     closed = false;
     size_w = w;
     size_h = h;
+    queue = al_create_event_queue();
     display = al_create_display(w, h);
     bgcolor = al_map_rgb(255, 255, 255);
+    al_register_event_source(queue, al_get_display_event_source(getDisplay()));
 }
 
 Display::Display (int w, int h) { Init(w, h); }
@@ -42,6 +44,33 @@ void Display::renderEvents() {
     }
 }
 
+void Display::tick () {
+    ALLEGRO_EVENT ev;
+    while (!al_is_event_queue_empty(queue)) {
+        al_get_next_event(queue, &ev);
+        switch (ev.type) {
+            case ALLEGRO_EVENT_DISPLAY_CLOSE:
+                setDisplayState(DCLOSED);
+                break;
+            case ALLEGRO_EVENT_DISPLAY_SWITCH_OUT:
+                if (getDisplayState() != DINACTIVE) {
+                    printf("Lost Focus\n");
+                    setDisplayState(DINACTIVE);
+                } break; //So neek kills me
+            case ALLEGRO_EVENT_DISPLAY_SWITCH_IN:
+                if (getDisplayState() != DACTIVE) {
+                    printf("Gained Focus\n");
+                    setDisplayState(DACTIVE);
+                } break; 
+        }
+    }
+}
+
+void Display::setDisplayState (DisplayState s) { dstate = s; }
+DisplayState Display::getDisplayState () { return dstate; }
+void Display::addRenderable(Renderable *r) { renderables.push_back(r); }
+void Display::rmvRenderable(Renderable *r) { renderables.erase(renderables.begin()+findRenderable(r)); }
+
 int Display::findRenderable(Renderable *r) {
     for (int i=0; i < renderables.size(); i++) {
         if (renderables[i] == r) {
@@ -51,11 +80,5 @@ int Display::findRenderable(Renderable *r) {
     return -1;
 }
 
-void Display::addRenderable(Renderable *r) {
-    renderables.push_back(r);
-}
 
-void Display::rmvRenderable(Renderable *r) {
-    renderables.erase(renderables.begin()+findRenderable(r));
-}
 

@@ -1,5 +1,9 @@
 #include "game.h"
 
+void handleInput(int inp, bool down) {
+    printf("Success %d!\n", inp);
+}
+
 int main(int argc, char **argv) { 
     Engine g;
     g.init();
@@ -23,12 +27,13 @@ int main(int argc, char **argv) {
     t->pos->x = size_x/2;
     t->pos->y = size_y/2;
     g.display->addRenderable(t);
+    g.addFunc(handleInput);
 
     g.addSprite(&s); // Now lets add the sprite to the game!
 
     char title[50] = "Test!";
     g.display->setTitle(title);
-    g.setState(ERUNNING);
+    setEngineState(ERUNNING);
     g.engineStart();
 
     return 0;

@@ -8,11 +8,15 @@
 
 #define DEFAULT_TITLE "2D3 -- Test Engine"
 
+enum DisplayState {DACTIVE, DINACTIVE, DCLOSED};
+
 class Display {
     private:
         void Init (int w, int h);
+        DisplayState dstate;
         ALLEGRO_DISPLAY *display;
         ALLEGRO_COLOR bgcolor;
+        ALLEGRO_EVENT_QUEUE *queue;
         int size_w, size_h;   
         bool closed, active;  
         char title [50];
@@ -40,8 +44,13 @@ class Display {
 
         // Calls
         void del ();
+        void tick();
         void render();
         void renderEvents();
+
+        //Engine State
+        void setDisplayState (DisplayState s);
+        DisplayState getDisplayState ();
 
         // Renderables
         int findRenderable(Renderable *r);
