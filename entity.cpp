@@ -1,11 +1,15 @@
 #include "entity.h"
 
 Entity::Entity () {
-	mass = defaultMass;
-	inertia = defaultInertia;
+    mass = defaultMass;
+    inertia = defaultInertia;
 }
 
 Entity::Entity (cpFloat m, cpFloat i) {
-	mass = m;
-	inertia = i;
+    mass = m;
+    inertia = i;
+}
+
+Entity::~Entity() {
+
 }
