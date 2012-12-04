@@ -7,6 +7,7 @@ Engine::Engine () {
 
 // Core Functions
 void Engine::setDisplay (Display *d) {
+    delete display;
     display = d;
 }
 
@@ -33,7 +34,7 @@ void Engine::engineStart() {
     al_start_timer(timer);
     ALLEGRO_EVENT ev;
     bool refresh;
-    while (1) {   
+    while (1) {
         al_wait_for_event(queue, &ev);
         switch (ev.type) {
             case ALLEGRO_EVENT_TIMER:
