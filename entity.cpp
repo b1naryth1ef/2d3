@@ -14,14 +14,30 @@ Entity::Entity () {
     sharedInit(defaultMass, defaultMoment);
 }
 
-Entity::Entity (cpFloat m, cpFloat moi) {
-    sharedInit(m, moi);
+Entity::Entity (cpFloat m, cpFloat i) {
+    sharedInit(m, i);
+}
+
+Entity::Entity(cpFloat m, cpFloat i, BaseSprite *s) {
+    sharedInit(m, i);
+    setSprite(s);
+
 }
 
 Entity::~Entity() {
     disablePhysics();
     if (shape) cpShapeFree(shape);
     if (body) cpBodyFree(body);
+}
+
+bool Entity::tick () { 
+    bool v = sprite->tick();
+    return true && v;
+}
+
+bool Entity::render (ALLEGRO_DISPLAY *display) {
+    bool v = sprite->render(display);
+    return true && v;
 }
 
 void Entity::disablePhysics() {

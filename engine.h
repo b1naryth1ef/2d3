@@ -5,6 +5,7 @@
 #include "display.h"
 #include "tickable.h"
 #include "sprite.h"
+#include "entity.h"
 #include <vector>
 #include <map>
 
@@ -47,9 +48,9 @@ class Engine {
         // Input
         void addFunc(void (*pointer)(int, bool));
 
-        // Sprites
-        void addSprite(BaseSprite *s);
-        void rmvSprite(BaseSprite *s);
+        // Entities
+        void addEntity(Entity *s);
+        void rmvEntity(Entity *s);
 
         // Tickables
         int findTickable(Tickable *t);

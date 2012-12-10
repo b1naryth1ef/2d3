@@ -124,12 +124,13 @@ void Engine::rmvTickable(Tickable *t) {
     tickables.erase(tickables.begin()+findTickable(t));
 }
 
-void Engine::addSprite(BaseSprite *s) {
+
+void Engine::addEntity(Entity *s) {
     addTickable(s);
     display->addRenderable(s);
 }
 
-void Engine::rmvSprite(BaseSprite *s) {
+void Engine::rmvEntity(Entity *s) {
     rmvTickable(s);
     display->rmvRenderable(s);
 }

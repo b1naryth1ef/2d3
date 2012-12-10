@@ -18,8 +18,12 @@ int main(int argc, char **argv) {
     AnimatedSprite s (bmp, .3);
     s.addFrame(0, 0, 16, 16); // This adds a frame (x, y offset and h/w)
     s.addFrame(16, 0, 16, 16); // And another
-    ALLEGRO_BITMAP *fexample = s.addFrame(0, 0, 16, 16); // Lets say we store these frames
-    s.rmvFrame(fexample); // We can remove them!
+
+    // And now a friendly entity to hold that sprite
+    Entity jeff;
+    jeff.setSprite(&s);
+
+    g.addEntity(&jeff);
 
     loadFont(1, "visitor2.ttf", 45);
     Text *t = new Text("Testing", 1);
@@ -28,8 +32,6 @@ int main(int argc, char **argv) {
     t->pos->y = size_y/2;
     g.display->addRenderable(t);
     g.addFunc(handleInput);
-
-    g.addSprite(&s); // Now lets add the sprite to the game!
 
     char title[50] = "Test!";
     g.display->setTitle(title);

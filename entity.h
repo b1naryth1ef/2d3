@@ -3,14 +3,15 @@
 
 #include "global.h"
 #include "tickable.h"
+#include "render.h"
 #include "sprite.h"
 
 const cpFloat defaultMass = INFINITY;
 const cpFloat defaultMoment = INFINITY;
 
-class Entity: public Tickable {
+class Entity: public Tickable, public Renderable {
     private:
-        /* physics */
+        // physics 
         cpFloat mass;
         cpFloat moment;
         cpBody *body;
@@ -18,13 +19,18 @@ class Entity: public Tickable {
 
         bool physicsEnabled;
 
-        /* shared by constructors */
+        // shared by constructors
         void sharedInit(cpFloat m, cpFloat moi);
+
+        // Overrides
+        bool tick ();
+        bool render (ALLEGRO_DISPLAY *display);
 
     public:
         BaseSprite *sprite;
         Entity ();
         Entity (cpFloat m, cpFloat i);
+        Entity (cpFloat m, cpFloat i, BaseSprite *s);
         ~Entity ();
 
         void disablePhysics();

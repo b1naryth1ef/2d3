@@ -7,5 +7,6 @@
 #include "engine.h"
 #include "sprite.h"
 #include "tickable.h"
+#include "entity.h"
 
 #endif
