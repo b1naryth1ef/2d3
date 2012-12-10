@@ -11,7 +11,7 @@ void Entity::sharedInit(cpFloat m, cpFloat moi) {
 }
 
 Entity::Entity () {
-    sharedInit(defaultMass, defaultMoment);
+    sharedInit(10, 1);
 }
 
 Entity::Entity (cpFloat m, cpFloat i) {
@@ -32,6 +32,8 @@ Entity::~Entity() {
 
 bool Entity::tick () { 
     bool v = sprite->tick();
+    sprite->x = body->p.x;
+    sprite->y = body->p.y;
     return true && v;
 }
 
@@ -55,6 +57,7 @@ void Entity::disablePhysics() {
 }
 
 void Entity::enablePhysics(cpSpace *space) {
+    printf("Enabled phsyics!\n");
     if (shape) cpSpaceAddShape(space, shape);
     if (body) cpSpaceAddBody(space, body);
 }
@@ -66,4 +69,10 @@ bool Entity::setShape(cpShape *sh) {
     shape = sh;
 
     return true;
+}
+
+void Entity::applyImpulse(float x, float y) {
+    const cpVect a = cpv(x, y);
+    const cpVect b = cpv(0, 0);
+    cpBodyApplyImpulse(body, a, b);
 }

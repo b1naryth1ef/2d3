@@ -16,9 +16,6 @@ Engine::Engine () {
 }
 
 // Core Functions
-void Engine::addFunc(void (*pointer)(int, bool)) {
-    inputables.push_back(pointer);
-}
 
 void Engine::setDisplay (Display *d) {
     delete display;
@@ -33,6 +30,8 @@ void Engine::init () {
     al_install_keyboard();
     al_install_mouse();
 
+    space = cpSpaceNew();
+
     timer = al_create_timer(1.0 / DEFAULT_FPS);
     display = new Display (size_x, size_y);
     tqueue = al_create_event_queue();
@@ -40,6 +39,7 @@ void Engine::init () {
     al_register_event_source(tqueue, al_get_timer_event_source(timer));
     al_register_event_source(iqueue, al_get_mouse_event_source());
     al_register_event_source(iqueue, al_get_keyboard_event_source());
+    cpSpaceStep(space, 0);
 }
 
 void Engine::engineQuit() {
@@ -53,14 +53,13 @@ void Engine::tickInput () {
         al_get_next_event(iqueue, &ev);
         if (ev.type == ALLEGRO_EVENT_KEY_UP || ev.type == ALLEGRO_EVENT_KEY_DOWN) {
             bool g = ev.type == ALLEGRO_EVENT_KEY_UP;
-            for (int i=0; i < inputables.size(); i++) {
-                inputables[i](ev.keyboard.keycode, g);
-            }
+            input.setInput(ev.keyboard.keycode, g);
         }
     }
 }
 
 void Engine::engineStart() {
+
     al_start_timer(timer);
     ALLEGRO_EVENT ev;
     while (1) {   
@@ -83,7 +82,7 @@ void Engine::engineStart() {
         for (int i=0; i < tickables.size(); i++) {
             tickables[i]->ticks();
         }
-
+        cpSpaceStep(space, 1/fps);
         engineRender();
     }
 }
@@ -124,8 +123,8 @@ void Engine::rmvTickable(Tickable *t) {
     tickables.erase(tickables.begin()+findTickable(t));
 }
 
-
 void Engine::addEntity(Entity *s) {
+    s->enablePhysics(space);
     addTickable(s);
     display->addRenderable(s);
 }

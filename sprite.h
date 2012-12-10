@@ -13,6 +13,7 @@ class BaseSprite: public Renderable, public Tickable {
         BaseSprite (ALLEGRO_BITMAP *bmp);
         virtual bool render (ALLEGRO_DISPLAY *display);
         virtual bool tick ();
+        int x, y;
 };
 
 class AnimatedSprite: public BaseSprite {

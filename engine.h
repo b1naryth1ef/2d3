@@ -12,7 +12,6 @@
 #define DEFAULT_FPS 60
 
 enum EngineState {ELOADING, ERUNNING, EPAUSED, EQUIT};
-//extern EngineState estate;
 
 void setEngineState(EngineState s); 
 EngineState getEngineState(); 
@@ -21,11 +20,11 @@ typedef void (*fpointer)(int, bool);
 class Engine {
     private:
         std::vector<Tickable *> tickables;
-        std::vector<fpointer> inputables;
         ALLEGRO_EVENT_QUEUE *tqueue; //Tick queue
         ALLEGRO_EVENT_QUEUE *iqueue; //Input queue
         ALLEGRO_FONT *font;
         ALLEGRO_TIMER *timer;
+        cpSpace *space;
         int fps;
 
         void tickInput();
@@ -33,6 +32,7 @@ class Engine {
     public:
         // Public Vars
         Display *display;
+        InputHolder input;
 
         // Constructor
         Engine ();
@@ -44,9 +44,6 @@ class Engine {
         void engineRender();
         void engineSleep();
         void engineSleep(float s);
-
-        // Input
-        void addFunc(void (*pointer)(int, bool));
 
         // Entities
         void addEntity(Entity *s);

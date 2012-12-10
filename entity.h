@@ -33,6 +33,8 @@ class Entity: public Tickable, public Renderable {
         Entity (cpFloat m, cpFloat i, BaseSprite *s);
         ~Entity ();
 
+        void applyImpulse(float x, float y);
+
         void disablePhysics();
         void enablePhysics(cpSpace *space);
 

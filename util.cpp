@@ -1,5 +1,32 @@
 #include "util.h"
 
+void InputHolder::setInput(int k, bool down) {
+    if (down) {
+        setKeyDown(k);
+    } else {
+        setKeyUp(k);
+    }
+    if (binds.find(k) != binds.end()) {
+        binds[k](k, down);
+    }
+}
+
+InputState InputHolder::getKey (int k) {
+    if (keys.find(k) != keys.end()) {
+        return keys[k];
+    } else {
+        return UP;
+    }
+}
+
+void InputHolder::bindKey(int k, void (*pointer)(int, bool)) {
+    binds[k] = pointer;
+}
+
+void InputHolder::unbindKey(int k) {
+    binds.erase(binds.find(k));
+}
+
 Pos::Pos () {
     x = 1;
     y = 1;
@@ -67,13 +94,13 @@ bool Pos::operator>= (Pos p2) {
 
 
 bool Pos::addX(float v) { 
-    if (!checkPos(x+v, y)) { return false; }
+    //if (!checkPos(x+v, y)) { return false; }
     x += v;
     return true;
 }
 
 bool Pos::addY(float v) { 
-    if (!checkPos(x, y+v)) { return false; }
+   // if (!checkPos(x, y+v)) { return false; }
     y += v;
     return true;
 }

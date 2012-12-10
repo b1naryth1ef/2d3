@@ -2,6 +2,24 @@
 #define UTIL_H_
 
 #include <map>
+enum InputState {DOWN, UP};
+typedef void (*fpointy)(int, bool);
+
+class InputHolder {
+    private:
+        std::map<int, fpointy> binds;
+        std::map<int, InputState> keys;
+
+        void setKeyDown(int k) { keys[k] = DOWN; }
+        void setKeyUp(int k) { keys[k] = UP; }
+
+    public:
+        void setInput(int k, bool down);
+        InputState getKey(int k);
+
+        void bindKey(int k, void (*pointer)(int, bool));
+        void unbindKey(int k);
+};
 
 struct Pos { //Handy struct for postional data
     float x, y, maxx, maxy;
