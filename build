@@ -1,1 +1,25 @@
-g++ -g engine.cpp render.cpp display.cpp sprite.cpp game.cpp tickable.cpp util.cpp -o game -lallegro -lallegro_main -lallegro_font -lallegro_ttf -lallegro_image -lallegro_primitives
+DEBUGFLAG="-g"
+
+FILESCPP="\
+engine.cpp \
+render.cpp \
+display.cpp \
+sprite.cpp \
+game.cpp \
+tickable.cpp \
+util.cpp \
+entity.cpp \
+"
+
+LIBS="\
+-lallegro \
+-lallegro_main \
+-lallegro_font \
+-lallegro_ttf \
+-lallegro_image \
+-lallegro_primitives \
+-lchipmunk \
+"
+
+g++ $DEBUGFLAG $FILESCPP -o game $LIBS
+

@@ -21,6 +21,7 @@ void Engine::addFunc(void (*pointer)(int, bool)) {
 }
 
 void Engine::setDisplay (Display *d) {
+    delete display;
     display = d;
 }
 
