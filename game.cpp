@@ -10,16 +10,16 @@ Entity jeff;
 
 void handleA (int k, bool down) {
     //jeff.sprite->x += 5;
-    if (down) { jeff.applyImpulse(-1, 0); }
+    if (down) { jeff.applyImpulse(-100, 0); }
 }
 void handleW (int k, bool down) {
-    if (down) { jeff.applyImpulse(0, -1); }
+    if (down) { jeff.applyImpulse(0, -100); }
 }
 void handleS (int k, bool down) {
-    if (down) { jeff.applyImpulse(0, 1); }
+    if (down) { jeff.applyImpulse(0, 100); }
 }
 void handleD (int k, bool down) {
-    if (down) { jeff.applyImpulse(1, 0); }
+    if (down) { jeff.applyImpulse(100, 0); }
 }
 
 void handleInput(int inp, bool down) {}
