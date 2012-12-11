@@ -32,9 +32,9 @@ Entity::~Entity() {
 
 bool Entity::tick () {
     bool v = sprite->tick();
-    sprite->x = body->p.x;
-    sprite->y = body->p.y;
-    printf("%f %f\n", body->p.x, body->p.y);
+    sprite->pos->x = body->p.x;
+    sprite->pos->y = body->p.y;
+    //printf("%f %f\n", body->p.x, body->p.y);
     return true && v;
 }
 

@@ -12,12 +12,10 @@ bool BaseSprite::render(ALLEGRO_DISPLAY *display) {
 }
 
 bool BaseSprite::tick() {
-    pos->addX(.01);
-    pos->addY(.01);
     return true;
 }
 
-AnimatedSprite::AnimatedSprite (ALLEGRO_BITMAP *bmp, float f) : BaseSprite (bmp) { 
+AnimatedSprite::AnimatedSprite (ALLEGRO_BITMAP *bmp, float f) : BaseSprite (bmp) {
     cur_frame = 0;
     num_frames = 0;
     fps = f;
@@ -34,8 +32,7 @@ int AnimatedSprite::findFrame (ALLEGRO_BITMAP *f) {
 }
 
 bool AnimatedSprite::render(ALLEGRO_DISPLAY *display) {
-    //printf("%f, %f", pos->x, pos->y);
-    al_draw_bitmap(getCurrentFrame(), x, y, 0);
+    al_draw_bitmap(getCurrentFrame(), pos->x, pos->y, 0);
     return true;
 }
 
