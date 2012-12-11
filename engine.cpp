@@ -31,6 +31,8 @@ void Engine::init () {
     al_install_mouse();
 
     space = cpSpaceNew();
+    //cpSpaceSetGravity(space, cpv(0.0, 1200.0));
+    //cpSpaceSetDamping(space, 0.05);
 
     timer = al_create_timer(1.0 / DEFAULT_FPS);
     display = new Display (size_x, size_y);
@@ -62,7 +64,7 @@ void Engine::engineStart() {
 
     al_start_timer(timer);
     ALLEGRO_EVENT ev;
-    while (1) {   
+    while (1) {
         al_wait_for_event(tqueue, &ev);
 
         // Tick other queues
@@ -82,7 +84,7 @@ void Engine::engineStart() {
         for (int i=0; i < tickables.size(); i++) {
             tickables[i]->ticks();
         }
-        cpSpaceStep(space, 1/fps);
+        cpSpaceStep(space, (float)1/fps);
         engineRender();
     }
 }

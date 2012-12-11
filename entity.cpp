@@ -1,8 +1,8 @@
 #include "entity.h"
 
 void Entity::sharedInit(cpFloat m, cpFloat moi) {
-    mass = defaultMass;
-    moment = defaultMoment;
+    mass = m;
+    moment = moi;
     body = cpBodyNew(mass, moment);
     shape = NULL;
     physicsEnabled = false;
@@ -30,10 +30,11 @@ Entity::~Entity() {
     if (body) cpBodyFree(body);
 }
 
-bool Entity::tick () { 
+bool Entity::tick () {
     bool v = sprite->tick();
     sprite->x = body->p.x;
     sprite->y = body->p.y;
+    printf("%f %f\n", body->p.x, body->p.y);
     return true && v;
 }
 
@@ -74,5 +75,6 @@ bool Entity::setShape(cpShape *sh) {
 void Entity::applyImpulse(float x, float y) {
     const cpVect a = cpv(x, y);
     const cpVect b = cpv(0, 0);
+
     cpBodyApplyImpulse(body, a, b);
 }

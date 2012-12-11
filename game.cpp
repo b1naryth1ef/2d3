@@ -24,7 +24,7 @@ void handleD (int k, bool down) {
 
 void handleInput(int inp, bool down) {}
 
-int main(int argc, char **argv) { 
+int main(int argc, char **argv) {
     g.init();
 
     ALLEGRO_BITMAP *bmp = al_load_bitmap("test.png");
