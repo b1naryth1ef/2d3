@@ -12,9 +12,9 @@ void handleInput(int inp, bool down) {}
 
 void tickCall () {
     if (g.input.getKey(1) == DOWN) { jeff.applyImpulse(-100, 0); }
-    else if (g.input.getKey(23) == DOWN) { jeff.applyImpulse(0, -100); }
-    else if (g.input.getKey(19) == DOWN) { jeff.applyImpulse(0, 100); }
-    else if (g.input.getKey(4) == DOWN) { jeff.applyImpulse(100, 0); }
+    if (g.input.getKey(23) == DOWN) { jeff.applyImpulse(0, -100); }
+    if (g.input.getKey(19) == DOWN) { jeff.applyImpulse(0, 100); }
+    if (g.input.getKey(4) == DOWN) { jeff.applyImpulse(100, 0); }
 }
 
 int main(int argc, char **argv) {
