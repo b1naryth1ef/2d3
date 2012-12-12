@@ -8,21 +8,14 @@ Entity jeff;
 // S: 19
 // D: 4
 
-void handleA (int k, bool down) {
-    //jeff.sprite->x += 5;
-    if (down) { jeff.applyImpulse(-100, 0); }
-}
-void handleW (int k, bool down) {
-    if (down) { jeff.applyImpulse(0, -100); }
-}
-void handleS (int k, bool down) {
-    if (down) { jeff.applyImpulse(0, 100); }
-}
-void handleD (int k, bool down) {
-    if (down) { jeff.applyImpulse(100, 0); }
-}
-
 void handleInput(int inp, bool down) {}
+
+void tickCall () {
+    if (g.input.getKey(1) == DOWN) { jeff.applyImpulse(-100, 0); }
+    else if (g.input.getKey(23) == DOWN) { jeff.applyImpulse(0, -100); }
+    else if (g.input.getKey(19) == DOWN) { jeff.applyImpulse(0, 100); }
+    else if (g.input.getKey(4) == DOWN) { jeff.applyImpulse(100, 0); }
+}
 
 int main(int argc, char **argv) {
     g.init();
@@ -43,15 +36,10 @@ int main(int argc, char **argv) {
 
     loadFont(1, "visitor2.ttf", 45);
     Text *t = new Text("Testing", 1);
-    //t->setActive(false);
     t->pos->x = size_x/2;
     t->pos->y = size_y/2;
     g.display->addRenderable(t);
-    //g.addFunc(handleInput);
-    g.input.bindKey(1, handleA);
-    g.input.bindKey(23, handleW);
-    g.input.bindKey(19, handleS);
-    g.input.bindKey(4, handleD);
+    g.setCallOnTick(tickCall);
 
     char title[50] = "Test!";
     g.display->setTitle(title);

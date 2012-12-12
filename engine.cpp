@@ -55,7 +55,7 @@ void Engine::tickInput () {
         al_get_next_event(iqueue, &ev);
         if (ev.type == ALLEGRO_EVENT_KEY_UP || ev.type == ALLEGRO_EVENT_KEY_DOWN) {
             bool g = ev.type == ALLEGRO_EVENT_KEY_UP;
-            input.setInput(ev.keyboard.keycode, g);
+            input.setInput(ev.keyboard.keycode, not g);
         }
     }
 }
@@ -80,12 +80,17 @@ void Engine::engineStart() {
         if (getEngineState() == EPAUSED) { continue; }
         else if (getEngineState() == EQUIT) { return engineQuit(); }
 
+        // Tick call action
+        if (callOnTick) { callOnTick(); }
+
         // Tick all our tickables
         for (int i=0; i < tickables.size(); i++) {
             tickables[i]->ticks();
         }
+        if (callPreRender) { callPreRender(); }
         cpSpaceStep(space, (float)1/fps);
         engineRender();
+        if (callPostRender) { callPostRender(); }
     }
 }
 

@@ -16,6 +16,7 @@ enum EngineState {ELOADING, ERUNNING, EPAUSED, EQUIT};
 void setEngineState(EngineState s); 
 EngineState getEngineState(); 
 typedef void (*fpointer)(int, bool);
+typedef void (*callpoint)();
 
 class Engine {
     private:
@@ -26,6 +27,12 @@ class Engine {
         ALLEGRO_TIMER *timer;
         cpSpace *space;
         int fps;
+
+        // Hooks
+        callpoint callOnTick;
+        callpoint callPreRender;
+        callpoint callPostRender;
+        
 
         void tickInput();
 
@@ -59,8 +66,10 @@ class Engine {
         void setFps(int i);
         int getFps();
 
-        
-        
+        // Calls
+        void setCallOnTick(callpoint f) { callOnTick = f; }
+        void setCallPreRender(callpoint f) { callPreRender = f; }
+        void setCallPostRender(callpoint f) { callPostRender = f; }
 };
 
 #endif
