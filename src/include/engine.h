@@ -27,6 +27,8 @@ class Engine {
         cpSpace *space;
         int fps;
 
+        EngineState estate;
+
         // Hooks
         callpoint callOnTick;
         callpoint callPreRender;
@@ -36,14 +38,11 @@ class Engine {
         void tickInput();
 
     public:
-        // Public Vars
         Display *display;
         InputHolder input;
 
-        // Constructor
         Engine ();
 
-        // Core Functions
         void init();
         void engineQuit();
         void engineStart();
@@ -51,22 +50,21 @@ class Engine {
         void engineSleep();
         void engineSleep(float s);
 
-        // Entities
         void addEntity(Entity *s);
         void rmvEntity(Entity *s);
 
-        // Tickables
         int findTickable(Tickable *t);
         void addTickable(Tickable *t);
         void rmvTickable(Tickable *t);
 
-        // Modifiers
         void setDisplay(Display *d);
         void setFps(int i);
         int getFps();
 
-        // Calls
         void setCallOnTick(callpoint f) { callOnTick = f; }
         void setCallPreRender(callpoint f) { callPreRender = f; }
         void setCallPostRender(callpoint f) { callPostRender = f; }
+
+        void setEngineState(EngineState s); 
+        EngineState getEngineState(); 
 };

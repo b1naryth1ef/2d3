@@ -1,17 +1,8 @@
 #include "engine.h"
 
-EngineState estate = ELOADING;
-
-void setEngineState (EngineState s) {
-    estate = s;
-}
-
-EngineState getEngineState () {
-    return estate;
-}
-
 // Constructor
 Engine::Engine () {
+    estate = ELOADING;
     fps = DEFAULT_FPS;
 }
 
@@ -74,7 +65,7 @@ void Engine::engineStart() {
         // Change engine states depending on display status
         if (display->getDisplayState() == DCLOSED) { setEngineState(EQUIT); }
         else if (display->getDisplayState() == DINACTIVE) { setEngineState(EPAUSED);}
-        else if (getEngineState() != ERUNNING) { setEngineState(ERUNNING); }
+        //else if (getEngineState() != ERUNNING) { setEngineState(ERUNNING); }
 
         // Engine actions depending on state
         if (getEngineState() == EPAUSED) { continue; }
@@ -139,4 +130,13 @@ void Engine::addEntity(Entity *s) {
 void Engine::rmvEntity(Entity *s) {
     rmvTickable(s);
     display->rmvRenderable(s);
+}
+
+
+void Engine::setEngineState (EngineState s) {
+    estate = s;
+}
+
+EngineState Engine::getEngineState () {
+    return estate;
 }

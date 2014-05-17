@@ -10,7 +10,12 @@ Entity jeff;
 // D: 4
 
 void handleInput(int inp, bool down) {
-    jeff.setPosition(0, 0);
+    DEBUG("Key code: %i", inp);
+    if (inp == 17) {
+        g.setEngineState(EQUIT);
+    } else if (inp == 18) {
+        jeff.setPosition(0, 0);
+    }
 }
 
 void tickCall () {
@@ -46,10 +51,11 @@ int main(int argc, char **argv) {
 
     // Bind "q" to reset
     g.input.bindChar('q', handleInput);
+    g.input.bindChar('r', handleInput);
 
-    char title[50] = "Test!";
-    g.display->setTitle(title);
-    setEngineState(ERUNNING);
+    //char title[50] = "Test!";
+    g.display->setTitle(std::string("Test!"));
+    g.setEngineState(ERUNNING);
     g.engineStart();
 
     return 0;
