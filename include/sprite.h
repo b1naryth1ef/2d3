@@ -22,6 +22,9 @@ class AnimatedSprite: public BaseSprite {
         float fps;
         double last;
     public:
+        // If true, this sprite will not continue animatino
+        bool frozen;
+
         AnimatedSprite (ALLEGRO_BITMAP *bmp, float f);
 
         int getFps ();
@@ -29,6 +32,7 @@ class AnimatedSprite: public BaseSprite {
 
         int findFrame (ALLEGRO_BITMAP *f);
         ALLEGRO_BITMAP *addFrame (int x, int y, int w, int h);
+        void setFrame(int f);
         void rmvFrame(ALLEGRO_BITMAP *f);
 
         bool render (ALLEGRO_DISPLAY *display);
