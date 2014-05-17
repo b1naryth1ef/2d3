@@ -1,5 +1,6 @@
 #include "game.h"
 
+
 Engine g;
 Entity jeff;
 
@@ -19,11 +20,10 @@ void tickCall () {
     if (g.input.getKey(4) == DOWN) { jeff.applyImpulse(100, 0); }
 }
 
-
 int main(int argc, char **argv) {
     g.init();
 
-    ALLEGRO_BITMAP *bmp = al_load_bitmap("test.png");
+    ALLEGRO_BITMAP *bmp = al_load_bitmap("./res/test.png");
     if (!bmp) {
         printf("Could not load bmp!\n");
         return -1;
@@ -37,14 +37,15 @@ int main(int argc, char **argv) {
     jeff.setSprite(&s);
     g.addEntity(&jeff);
 
-    loadFont(1, "visitor2.ttf", 45);
+    loadFont(1, "./res/visitor2.ttf", 45);
     Text *t = new Text("Testing", 1);
     t->pos->x = size_x/2;
     t->pos->y = size_y/2;
     g.display->addRenderable(t);
     g.setCallOnTick(tickCall);
 
-    g.input.bindKey(17, handleInput);
+    // Bind "q" to reset
+    g.input.bindChar('q', handleInput);
 
     char title[50] = "Test!";
     g.display->setTitle(title);

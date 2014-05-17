@@ -1,5 +1,9 @@
 #include "render.h"
 
+/*
+    This is a utility function which loads a font into the internal font
+    cache.
+*/
 bool loadFont (int f, const char * name, int size) {
     if (FONTS.find(f) == FONTS.end()) { //Key doesnt exist
         FONTS[f] = al_load_font(name, size, 0);
@@ -10,6 +14,10 @@ bool loadFont (int f, const char * name, int size) {
     }
 }
 
+/*
+    This is a utility function which removes a font (by id) from the internal
+    font cache.
+*/
 bool unloadFont (int f) {
     if (FONTS.find(f) != FONTS.end()) {
         FONTS.erase(FONTS.find(f));
@@ -20,12 +28,16 @@ bool unloadFont (int f) {
     }
 }
 
+/*
+    This function returns a font (by id) from the internal font cache
+*/
 ALLEGRO_FONT *getFont (int f) {
     if (FONTS.find(f) != FONTS.end()) {
         return FONTS[f];
     }
     return NULL;
 }
+
 
 Renderable::Renderable () {
     active = true;

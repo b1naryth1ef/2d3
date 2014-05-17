@@ -1,8 +1,14 @@
 #pragma once
 
 #include <map>
+#include <string>
+#include <stdio.h>
+#include <ctype.h>
+#include "errors.h"
+
 enum InputState {DOWN, UP};
 typedef void (*fpointy)(int, bool);
+void DEBUG(const char* format, ...);
 
 class InputHolder {
     private:
@@ -18,6 +24,8 @@ class InputHolder {
 
         void bindKey(int k, void (*pointer)(int, bool));
         void unbindKey(int k);
+
+        int bindChar(char k, void(*pointer)(int, bool));
 };
 
 struct Pos { //Handy struct for postional data

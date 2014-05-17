@@ -7,7 +7,10 @@
 
 enum ErrorType {
     GENERIC,
-    UNDEFINED_INPUT};
+    UNDEFINED_INPUT,
+    INVALID_INPUT,
+    NOTIMPLEMENTTED
+};
 
 class GenericEngineError: public std::exception {
     public:
@@ -25,6 +28,12 @@ class GenericEngineError: public std::exception {
                 return std::string("GenericError");
             } else if (e == UNDEFINED_INPUT) {
                 return std::string("UndefinedInputError");
+            } else if (e == INVALID_INPUT ) {
+                return std::string("InvalidInputError");
+            } else if (e == NOTIMPLEMENTTED) {
+                return std::string("NotImplementtedError");
+            } else {
+                return std::string("Error");
             }
         }
 };

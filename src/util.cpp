@@ -1,5 +1,18 @@
 #include "util.h"
 
+void DEBUG(const char* format, ...) {
+    #ifndef ENABLE_DEBUG
+    return;
+    #endif
+
+    printf("DEBUG: ");
+    va_list argptr;
+    va_start(argptr, format);
+    vfprintf(stdout, format, argptr);
+    va_end(argptr);
+    printf("\n");
+}
+
 void InputHolder::setInput(int k, bool down) {
     if (down) {
         setKeyDown(k);
@@ -25,6 +38,31 @@ void InputHolder::bindKey(int k, void (*pointer)(int, bool)) {
 
 void InputHolder::unbindKey(int k) {
     binds.erase(binds.find(k));
+}
+
+/*
+    Binds a keyboard-character from A-Z 
+*/
+int InputHolder::bindChar(char k, void (*pointer)(int, bool)) {
+    int index = 1;
+    for (char c = 'A'; c <= 'Z'; c++) {
+        if (c == toupper(k)) {
+            break;
+        }
+        index++;
+    }
+
+    // If the index is 0, this means we didnt find a match anywhere, (remember
+    //    a == 1)
+    if (index == 27) {
+        throw GenericEngineError(
+            INVALID_INPUT,
+            "Character passed to bindChar must be from A-z (was: `%c`, %i)!", k, k);
+    }
+
+    // Pass the call on to bindKey and return the key-index
+    this->bindKey(index, pointer);
+    return index;
 }
 
 Pos::Pos () {

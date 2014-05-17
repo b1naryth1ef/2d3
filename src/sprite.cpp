@@ -16,6 +16,7 @@ bool BaseSprite::tick() {
 }
 
 AnimatedSprite::AnimatedSprite (ALLEGRO_BITMAP *bmp, float f) : BaseSprite (bmp) {
+    frozen = false;
     cur_frame = 0;
     num_frames = 0;
     fps = f;
@@ -38,7 +39,7 @@ bool AnimatedSprite::render(ALLEGRO_DISPLAY *display) {
 
 bool AnimatedSprite::tick() {
     // If we're frozen, don't bother animation
-    if (frozen) { return true; }
+    if (this->frozen) { return true; }
 
     if ((al_get_time()-last) > fps) {
         nextFrame();
