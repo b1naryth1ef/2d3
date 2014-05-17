@@ -1,5 +1,4 @@
-#ifndef ENGINE_H
-#define ENGINE_H
+#pragma once
 
 #include "global.h"
 #include "display.h"
@@ -71,5 +70,3 @@ class Engine {
         void setCallPreRender(callpoint f) { callPreRender = f; }
         void setCallPostRender(callpoint f) { callPostRender = f; }
 };
-
-#endif

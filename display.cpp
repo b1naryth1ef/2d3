@@ -1,5 +1,9 @@
 #include "display.h"
 
+/*
+    This file handles functions related to the display class
+*/
+
 void Display::Init (int w, int h) {
     closed = false;
     size_w = w;
@@ -56,12 +60,14 @@ void Display::tick () {
                 if (getDisplayState() != DINACTIVE) {
                     printf("Lost Focus\n");
                     setDisplayState(DINACTIVE);
-                } break; //So neek kills me
+                }
+                break;
             case ALLEGRO_EVENT_DISPLAY_SWITCH_IN:
                 if (getDisplayState() != DACTIVE) {
                     printf("Gained Focus\n");
                     setDisplayState(DACTIVE);
-                } break; 
+                }
+                break; 
         }
     }
 }

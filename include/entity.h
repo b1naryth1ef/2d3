@@ -1,5 +1,4 @@
-#ifndef ENTITY_H
-#define ENTITY_H
+#pragma once
 
 #include "global.h"
 #include "tickable.h"
@@ -34,6 +33,7 @@ class Entity: public Tickable, public Renderable {
         ~Entity ();
 
         void applyImpulse(float x, float y);
+        void setPosition(float x, float y);
 
         void disablePhysics();
         void enablePhysics(cpSpace *space);
@@ -45,5 +45,3 @@ class Entity: public Tickable, public Renderable {
 
         void setSprite(BaseSprite *sp) { sprite = sp; }
 };
-
-#endif

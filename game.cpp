@@ -8,7 +8,9 @@ Entity jeff;
 // S: 19
 // D: 4
 
-void handleInput(int inp, bool down) {}
+void handleInput(int inp, bool down) {
+    jeff.setPosition(0, 0);
+}
 
 void tickCall () {
     if (g.input.getKey(1) == DOWN) { jeff.applyImpulse(-100, 0); }
@@ -16,6 +18,7 @@ void tickCall () {
     if (g.input.getKey(19) == DOWN) { jeff.applyImpulse(0, 100); }
     if (g.input.getKey(4) == DOWN) { jeff.applyImpulse(100, 0); }
 }
+
 
 int main(int argc, char **argv) {
     g.init();
@@ -40,6 +43,8 @@ int main(int argc, char **argv) {
     t->pos->y = size_y/2;
     g.display->addRenderable(t);
     g.setCallOnTick(tickCall);
+
+    g.input.bindKey(17, handleInput);
 
     char title[50] = "Test!";
     g.display->setTitle(title);

@@ -1,5 +1,4 @@
-#ifndef GAME_H
-#define GAME_H
+#pragma once
 
 #include "global.h"
 #include "display.h"
@@ -8,5 +7,3 @@
 #include "sprite.h"
 #include "tickable.h"
 #include "entity.h"
-
-#endif

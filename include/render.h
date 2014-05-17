@@ -1,5 +1,4 @@
-#ifndef RENDER_H
-#define RENDER_H
+#pragma once
 
 #include "global.h"
 
@@ -58,4 +57,3 @@ class Text : public Renderable {
         const char *getText();
         TextType getTextType();
 };
-#endif

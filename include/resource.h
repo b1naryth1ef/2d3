@@ -2,8 +2,7 @@
 // resource.h: resource&management class/template
 // Author: Jeff Roberts <jeffroberts1@gmail.com>
 // ***************************************************************************
-#ifndef RESOURCE_H_
-#define RESOURCE_H_
+#pragma once
 
 // ***************************************************************************
 // Include section
@@ -79,6 +78,3 @@ template <class T> class ResourceManager {
 
 // ***************************************************************************
 // Extern section
-
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef DISPLAY_H
-#define DISPLAY_H
+#pragma once
 
 #include "global.h"
 #include "render.h"
@@ -57,5 +56,3 @@ class Display {
         void addRenderable(Renderable *r);
         void rmvRenderable(Renderable *r);
 };
-
-#endif

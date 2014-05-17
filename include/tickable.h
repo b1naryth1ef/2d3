@@ -1,5 +1,4 @@
-#ifndef TICKABLE_H
-#define TICKABLE_H
+#pragma once
 
 class Tickable {
     private:
@@ -12,6 +11,3 @@ class Tickable {
         bool getActive();
         void setActive(bool v);
 };
-
-
-#endif

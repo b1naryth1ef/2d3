@@ -78,3 +78,8 @@ void Entity::applyImpulse(float x, float y) {
 
     cpBodyApplyImpulse(body, a, b);
 }
+
+void Entity::setPosition(float x, float y) {
+    body->p.x = x;
+    body->p.y = y;
+}

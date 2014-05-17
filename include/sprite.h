@@ -1,5 +1,4 @@
-#ifndef SPRITE_H
-#define SPRITE_H
+#pragma once
 
 #include "global.h"
 #include "render.h"
@@ -39,5 +38,3 @@ class AnimatedSprite: public BaseSprite {
         ALLEGRO_BITMAP *getFrameAt(int id);
         ALLEGRO_BITMAP *getCurrentFrame();
 };
-
-#endif

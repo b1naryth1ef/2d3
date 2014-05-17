@@ -1,5 +1,4 @@
-#ifndef UTIL_H_
-#define UTIL_H_
+#pragma once
 
 #include <map>
 enum InputState {DOWN, UP};
@@ -56,5 +55,3 @@ struct Pos { //Handy struct for postional data
 struct Vector {
     float x, y, z;
 };
-
-#endif
