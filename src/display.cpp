@@ -52,6 +52,7 @@ void Display::tick () {
         al_get_next_event(queue, &ev);
         switch (ev.type) {
             case ALLEGRO_EVENT_DISPLAY_CLOSE:
+                DEBUG("Display was closed");
                 setDisplayState(DCLOSED);
                 break;
             case ALLEGRO_EVENT_DISPLAY_SWITCH_OUT:

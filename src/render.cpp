@@ -110,6 +110,7 @@ bool Text::render (ALLEGRO_DISPLAY *display) {
 void Text::setTextType (TextType t) {
     align = t;
 }
+
 TextType Text::getTextType() {
     return align;
 }

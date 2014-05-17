@@ -18,17 +18,19 @@ class BaseSprite: public Renderable, public Tickable {
 class AnimatedSprite: public BaseSprite {
     private:
         std::vector<ALLEGRO_BITMAP *> frames;
-        int num_frames, cur_frame;
-        float fps;
         double last;
     public:
-        // If true, this sprite will not continue animatino
+        // Represents the rate the frames are iterated through
+        float fps;
+
+        // Num frames is the total number of frames, and cur_frame is the current
+        //    frame number.
+        int num_frames, cur_frame;
+
+        // If true, this sprite will not continue animation
         bool frozen;
 
         AnimatedSprite (ALLEGRO_BITMAP *bmp, float f);
-
-        int getFps ();
-        void setFps (int f);
 
         int findFrame (ALLEGRO_BITMAP *f);
         ALLEGRO_BITMAP *addFrame (int x, int y, int w, int h);

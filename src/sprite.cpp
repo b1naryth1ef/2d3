@@ -71,13 +71,10 @@ void AnimatedSprite::nextFrame() {
 ALLEGRO_BITMAP *AnimatedSprite::getFrameAt(int index) {
     return frames[index];
 }
+
 ALLEGRO_BITMAP *AnimatedSprite::getCurrentFrame() {
     return frames[cur_frame];
 }
-
-void AnimatedSprite::setFps(int f) { fps = f; }
-
-int AnimatedSprite::getFps() { return fps; }
 
 void AnimatedSprite::setFrame(int f) {
     if (f > num_frames) {
