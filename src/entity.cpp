@@ -6,7 +6,7 @@ void Entity::sharedInit(cpFloat m, cpFloat moi) {
     body = cpBodyNew(mass, moment);
     shape = NULL;
     physicsEnabled = false;
-
+    pos = new Pos(0, 0, size_x, size_y);
     sprite = NULL;
 }
 
@@ -32,15 +32,15 @@ Entity::~Entity() {
 
 bool Entity::tick () {
     bool v = sprite->tick();
-    sprite->pos->x = body->p.x;
-    sprite->pos->y = body->p.y;
+    pos->x = body->p.x;
+    pos->y = body->p.y;
     //printf("%f %f\n", body->p.x, body->p.y);
     return true && v;
 }
 
 bool Entity::render (ALLEGRO_DISPLAY *display) {
-    bool v = sprite->render(display);
-    return true && v;
+    al_draw_bitmap(sprite->getImage(), pos->x, pos->y, 0);
+    return true;
 }
 
 void Entity::disablePhysics() {
@@ -58,7 +58,7 @@ void Entity::disablePhysics() {
 }
 
 void Entity::enablePhysics(cpSpace *space) {
-    printf("Enabled phsyics!\n");
+    DEBUG("Phsyics enabled for entity");
     if (shape) cpSpaceAddShape(space, shape);
     if (body) cpSpaceAddBody(space, body);
 }

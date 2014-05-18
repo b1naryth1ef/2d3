@@ -55,6 +55,8 @@ void Display::tick () {
                 DEBUG("Display was closed");
                 setDisplayState(DCLOSED);
                 break;
+            /*
+            Disabled: sometimes SWITCH_IN doesnt get called :(
             case ALLEGRO_EVENT_DISPLAY_SWITCH_OUT:
                 if (getDisplayState() != DINACTIVE) {
                     DEBUG("Lost display focus");
@@ -66,7 +68,7 @@ void Display::tick () {
                     DEBUG("Gained display focus");
                     setDisplayState(DACTIVE);
                 }
-                break; 
+                break; */
         }
     }
 }

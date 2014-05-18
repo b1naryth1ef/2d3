@@ -19,7 +19,7 @@ class Tickable {
 
         bool ticks () {
             if (active) {
-                return tick();
+                return this->tick();
             } else {
                 return false;
             }

@@ -6,13 +6,16 @@
 #include "util.h"
 #include <vector>
 
-class BaseSprite: public Renderable, public Tickable {
+class BaseSprite: public Tickable {
     public:
         ALLEGRO_BITMAP *img;
         BaseSprite (ALLEGRO_BITMAP *bmp);
         virtual bool render (ALLEGRO_DISPLAY *display);
         virtual bool tick ();
-        int x, y;
+
+        // getImage is used for rendering the sprite on screen by it's parent.
+        //  this should always return the renderable bitmap region of the sprite.
+        virtual ALLEGRO_BITMAP *getImage();
 };
 
 class AnimatedSprite: public BaseSprite {
@@ -23,9 +26,8 @@ class AnimatedSprite: public BaseSprite {
         // Represents the rate the frames are iterated through
         float fps;
 
-        // Num frames is the total number of frames, and cur_frame is the current
-        //    frame number.
-        int num_frames, cur_frame;
+        // cur_frame is the current frame number.
+        int cur_frame;
 
         // If true, this sprite will not continue animation
         bool frozen;
@@ -37,10 +39,13 @@ class AnimatedSprite: public BaseSprite {
         void setFrame(int f);
         void rmvFrame(ALLEGRO_BITMAP *f);
 
-        bool render (ALLEGRO_DISPLAY *display);
+        //bool render (ALLEGRO_DISPLAY *display);
         virtual bool tick ();
 
         void nextFrame();
         ALLEGRO_BITMAP *getFrameAt(int id);
         ALLEGRO_BITMAP *getCurrentFrame();
+
+        // getImage returns our current frame for this animated sprite.
+        virtual ALLEGRO_BITMAP *getImage();
 };

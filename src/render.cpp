@@ -9,7 +9,7 @@ bool loadFont (int f, const char * name, int size) {
         FONTS[f] = al_load_font(name, size, 0);
         return true;
     } else {
-        fprintf(stderr, "That font name (%d) already exists!\n", f);
+        DEBUG("That font name (%d) already exists!\n", f);
         return false;
     }
 }
@@ -23,7 +23,7 @@ bool unloadFont (int f) {
         FONTS.erase(FONTS.find(f));
         return true;
     } else {
-        fprintf(stderr, "That font name (%d) does not exist!\n", f);
+        DEBUG("That font name (%d) does not exist!\n", f);
         return false;
     }
 }

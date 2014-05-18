@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
 
     ALLEGRO_BITMAP *bmp = al_load_bitmap("./res/test.png");
     if (!bmp) {
-        printf("Could not load bmp!\n");
+        DEBUG("Could not load bmp!\n");
         return -1;
     }
 
@@ -38,6 +38,13 @@ int main(int argc, char **argv) {
     AnimatedSprite s (bmp, .3);
     s.addFrame(0, 0, 16, 16); // This adds a frame (x, y offset and h/w)
     s.addFrame(16, 0, 16, 16); // And another
+
+    Entity *e;
+    for (int i=0; i < 100; i++) {
+        e = new Entity;
+        e->setSprite(&s);
+        g.addEntity(e);
+    }
 
     jeff.setSprite(&s);
     g.addEntity(&jeff);

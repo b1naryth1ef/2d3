@@ -27,6 +27,8 @@ class Entity: public Tickable, public Renderable {
 
     public:
         BaseSprite *sprite;
+        Pos *pos;
+
         Entity ();
         Entity (cpFloat m, cpFloat i);
         Entity (cpFloat m, cpFloat i, BaseSprite *s);
