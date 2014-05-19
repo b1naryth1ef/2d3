@@ -6,6 +6,7 @@ This file serves as a very simple build script for 2d3.
 
 import os, fnmatch
 
+# Third party libraries to link against
 LIBRARIES = [
     "allegro",
     "allegro_main",
@@ -16,16 +17,13 @@ LIBRARIES = [
     "chipmunk"
 ]
 
+# Includes
 INCLUDES = [
     "./src/include/"
 ]
 
 FILE_IGNORES = [
     "rtest.cpp"
-]
-
-FLAGS = [
-    "ENABLE_DEBUG"
 ]
 
 def find_c_files():
@@ -38,21 +36,26 @@ def find_c_files():
                 result.append(os.path.join(path, fname))
     return result
 
-def build(libs, fs, incl,flags, output, debug=True):
+def build():
+    for f in find_c_files():
+        print "Building object for %s" % f
+        os.system(build_command(["ENABLE_DEBUG"]) + " %s" % f)
+
+    print "Building library..."
+    os.system("ar rvs lib2d3.a *.o")
+
+    print "Cleaning up..."
+    os.system("rm *.o")
+
+def build_command(flags, debug=True):
     print "Attempting build..."
-    base = "g++"
-    base += (" -g " if debug else " ")
-    base += " ".join(fs)
-    base += " -o %s " % output
-    base += " ".join(["-I%s" % i for i in incl])
+    base = "g++ -c "
+    base += " ".join(["-I%s" % i for i in INCLUDES])
     base += " "
-    base += " ".join(["-l%s" % i for i in libs])
+    base += " ".join(["-l%s" % i for i in LIBRARIES])
     base += " "
     base += " ".join(["-D%s" % i for i in flags])
-    if os.system(base) == 0:
-        print "Build Finished!"
-    else:
-        print "Build Failed!"
+    return base
 
 if __name__ == "__main__":
-    build(LIBRARIES, find_c_files(), INCLUDES, FLAGS, "game")
+    build()

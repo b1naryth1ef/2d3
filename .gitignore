@@ -3,3 +3,5 @@ game
 *~
 *#
 .DS_Store
+*.a
+*.o
